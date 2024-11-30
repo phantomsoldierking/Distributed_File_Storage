@@ -28,7 +28,7 @@ type FileServer struct {
 	peerLock sync.Mutex
 	peers    map[string]p2p.Peer
 
-	store  *store
+	store  *Store
 	quitch chan struct{}
 }
 
@@ -285,7 +285,7 @@ func (s *FileServer) bootstrapNetwork() error {
 			if err := s.Transport.Dial(addr); err != nil {
 				log.Println("dial error: ", err)
 			}
-		}()
+		}(addr)
 	}
 
 	return nil
